@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ECE 498 - RADAR: Paper Review}
+
+\author{Amod Agrawal, amodka2}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Summary}
+Indoor localization is an important problem because it enables a lot of location-aware applications including indoor navigation and provides significant contextual information on user's actions and their intents. In this paper, the authors propose a solution to indoor localization where they use WiFi base stations as static anchors and triangulate the user's location using the distances of the mobile device from the base stations.\\
+
+Previous literature at the time had only explored solutions involving deployment of infrared based anchors. The issue with IR is that it's not used for data communication and will only be used for localization. This means high installation cost along with poor scalability. This work solves this issue by using WiFi base stations as anchors for localization, which were wildly growing at the time as the wireless technology was become ubiquitous.\\
+
+This work uses the technique of offline fingerprinting - where the users have to collect some signal strength data first and label it by marking their location. Once the locations of the base stations are known along with few data samples showing correlation between the signal strength and location of the user relative to base station, the k Nearest Neighbor algorithm is used to search the space of the empirical and localize the user with an accuracy of few meters.\\
+
+This work also proposes a more generic model based on the signal propagation. Based on certain assumptions, the signal propagation model can create a heat map for the signal strength inside the building. This model can then be combined with k-NN algorithm to search the space. \\
+
+\section{Critique \& Opinion}
+
+The proposed solution requires us to fingerprint the environment before the system can be used. To fingerprint the area, the location of all the base stations must be known first. The users are then asked to collect data in different parts of the floor plan and different locations relative to the base station. This doesn't make the system easily deployable and scalable for large malls and shopping centers.\\
+
+The signal propagation model can often fail to take into account the degradation of signal strength as it passes through objects, people, and walls. Different kind of structures can attenuate the signal differently. Also there can be a lot of fluctuations in the RF due to commotion, other devices transmitting, and even devices like microwave operating at the same frequency as WiFi.\\
+
+While this work uses "user tracking" to make sure that the samples collected while the user is mobile are averaged and the fluctuations due to mobility are disregarded, it doesn't use any kind of positional tracking i.e. using tracking techniques to predict the motion and trajectory of the user.\\
+
+This work also doesn't use any kind of sensors on the smartphone to predict trajectory of the user - IMUs. Perhaps, this remains unexplored because at the time (2000) the mobile devices didn't have IMU sensors.\\ 
+
+While this paper opened gates to new ideas on how to solve the problem of indoor localization, to a great extent - it still remains a largely unsolved problem.\\ 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+
+\end{document}

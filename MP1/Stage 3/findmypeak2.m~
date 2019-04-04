@@ -1,0 +1,42 @@
+function [pks, locs] = findmypeak2(data)
+    pks = [];
+    locs = [];
+    idx=1;
+    buffersize = 500;
+    buffer=[];
+    while(idx+buffersize<length(data)
+        buffer = data(idx:idx+buffersize);
+        i = 250;
+        while(i<length(buffer)-250)
+            if(mean(buffer(i-249:i))<buffer(i) && buffer(i)>mean(buffer(i:i+249)))
+                if(buffer(i) >= 10.5)
+                    pks = [pks data(i)];
+                    locs = [locs i];
+                    i = i+250;
+                else
+                    i=i+1;
+                end 
+            else
+                i = i+1;
+            end
+        end
+    end
+    
+    
+    i=250;
+    while(i<length(data)-250)
+        %disp(i);
+        if(mean(data(i-249:i))<data(i) && data(i)>mean(data(i:i+249)))
+            if(data(i) >= 10.5)
+                pks = [pks data(i)];
+                locs = [locs i];
+                i = i+250;
+            else
+                i=i+1;
+            end
+            
+        else
+            i = i+1;
+        end
+    end
+end

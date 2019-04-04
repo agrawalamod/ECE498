@@ -1,0 +1,44 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ECE 498 - MUSE: Paper Review}
+
+\author{Amod Agrawal, amodka2}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Summary}
+Inertial Motion Tracking uses the IMU sensors to track the orientation, motion and trajectory of the device. However, the sensors read data in the local frame of reference (LRF) of the device and to find the global location of the device, we need global ``anchors'' to project LRF data into the global frame of reference (GRF). Since gravity and magnetic north are constant vectors that the sensors can detect, they're used as anchors to find the orientation of the device (LRF) with respect to the GRF. However, the gravity anchor can be polluted by linear acceleration of the device and hence can only be used at points where the device is static or is in state of pure rotation. This work proposes that magnetic north is a better anchor than gravity because it's not affected by linear acceleration of the device. Since the magnetic north vector's magnitude and direction is highly sensitive to locations, MUSE requires the device to start from a static position where it first uses gravity to estimate the magnetic vector precisely and thereafter uses it to compute orientation. The core observation used is that gyroscope is precise over short periods of time and drifts due to integration over time, whereas, magnetometer readings have fluctuations over short periods of time but doesn't drift. A complementary filter is used to combine the data from both the sensors. \\
+
+This work also proposes a particle filter based technique that can jointly estimate the orientation and location of the device when the motion is restricted as opposed to estimating them serially. While the orientation error and its divergence is bounded by anchors such as gravity and magnetic north, location error is unbounded because there are no global anchors to reset error when it diverges over time. However, if the motion is restricted: certain motion models and its constraints along with IMU orientation can help bound the errors. Consistent bayesian tracking using MUSE orientation and valid location space constraints allow the system to bound the error at every step and hence not causing the location error to diverge over time. 
+
+\section{Critique \& Opinion}
+This paper is an interesting read because it offers not only a good overview of current tracking solutions but also proposes an impressive gain using no new hardware in a fairly matured field of inertial tracking. The idea behind MUSE can be challenged by few cases when either (1) the magnetic interference in the environment is very high thus causing the magnetic anchor to be unreliable. (2) the algorithm is unable to get initialized in a static position with unpolluted gravity. In a rare case, if devices rotates around the anchor vector, system won't be able to use it for orientation. Authors do show the accuracy spanning different environmental electromagnetic noise which can go up to 50-80 degrees. \\
+
+The second part of the work is immensely impactful because most devices that require inertial tracking usually follow a motion model. Most wearables and home/industrial robots have certain kind of constraints which can be used to bound the location error. However, defining motion models that are generic enough is a hard problem. With latest advancements, precise user-specific motion models can however be learned over time as the user uses the device. \\
+
+Finally, it would be interesting to see how this adds value to indoor localization solutions like UnLoc where we have certain location anchors as well. With better orientation \& motion tracking and bayesian based filtering for mobile devices: it would be fascinating to see how overall indoor localization error reduces.
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+
+\end{document}

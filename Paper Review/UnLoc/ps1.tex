@@ -1,0 +1,42 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ECE 498 - UnLoc: Paper Review}
+
+\author{Amod Agrawal, amodka2}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Summary}
+Indoor localization is an important problem because it enables a lot of location-aware applications including indoor navigation and provides significant contextual information on user's actions and their intents. In this paper, the authors propose a completely infrastructure-less and scalable solution to indoor localization using the sensors on the mobile device. This eliminates the need to fingerprint the location before the system can be deployed.\\
+
+The core idea is to collect sensor trace from the smartphone and cluster them in the sensor space. The clusters in the sensor space that map to clusters in the localization space can be thought of as "landmarks". That is, while there are no actual landmarks to guide the localization when we look at the world from the eyes of the sensors we can define landmarks as certain locations where the sensor readings have certain patterns. When multiple users collect this data, they all have a vague location estimate of these locations using dead reckoning. The different estimates of the landmarks can be used to average out the error if the individual errors are independent and uncorrelated. Based on it, the system would converge to certain landmark locations. The users can dead reckon their way inside the building and when they're drifting from their actual path the landmarks can be used to clip back or reset their error to zero. \\
+
+\section{Critique \& Opinion}
+	
+The solution this paper proposes is scalable in deployment and doesn't involve any infrastructure. The idea of doing unsupervised and infrastructure-less indoor localization is the holy grail in the community. Since the solution depends on sensor signatures, there is a possibility that different devices will show varied signatures. This will affect the scalability of the solution because all the devices would need to have their own landmarks. Another shortcoming is that landmarks might change or disappear over time, which will take certain number of iterations of incorrect localization by multiple users. This solution is only deployable by large organizations which can access sensors and their data on users' phones. Using multiple sensors throughout the process will also drain battery life.\\
+
+This solution is definitely a big step ahead in the space of indoor localization and provides a truly scalable solution. However, it still remains an unsolved problem because it comes with few short coming and the dead reckoning between landmarks still has error. Crowdsourcing solutions can generally be an issue when it comes to global deployment.\\ 
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+
+\end{document}
