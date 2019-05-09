@@ -8,7 +8,7 @@ clear all;
 %d = readtable('./Amod_04-19-18_09:19:38_Peak5.csv');
 
 %d = readtable('./Amod_05-01-18_12:01:15_NewData.csv');
-d = readtable('./Amod_03-51-19_02:51:56_DataCol3.csv');
+d = readtable('./ashutosh_24-36-19_01:36:44_test.csv');
 
 data = notContinous(d);
 time = data(:,1);
@@ -28,11 +28,8 @@ result = smooth(acc,50);
 %result = acc;
 
 %[pks,locs] = findpeaks(result,'MinPeakHeight',10.5,'MinPeakDistance',400);
-[pks,locs] = findpeaks(result, 'MinPeakHeight', 10.8, 'MinPeakDistance', 50);
+[pks,locs] = findpeaks(result, 'MinPeakHeight', 10.4, 'MinPeakDistance', 50);
 disp(length(pks));
-
-
-
 
 figure;
 plot((1:length(result)), result);
@@ -42,7 +39,7 @@ title('Step detection (after low-pass filtering)');
 xlabel('Time');
 ylabel('Acceleration');
 
-[pks, locs] = findmypeak(result, 10.8, 70);
+[pks, locs] = findmypeak(result, 10.4, 70);
 disp(length(pks));
 
 figure;

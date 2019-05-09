@@ -1,0 +1,51 @@
+\documentclass[a4paper]{article}
+
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\title{ECE 498 - iBall: Paper Review}
+
+\author{Amod Agrawal, amodka2}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Summary}
+This work focuses on bringing sensing to sports for better analytics. Current systems use HawkEye which is an expensive camera-based system that uses computer vision algorithms to track the players and the ball on the field. While these camera systems are able to track the ball up to sub-cm accuracy, they fall short on two terms: 1) They are very expensive and require significant infrastructure deployment, therefore, small schools and organizations can't afford them, 2) They can't track the spin of the ball. This work introduces IMU sensors and UWB radios inside the ball to be able to track its trajectory and spin.\\
+
+While the problem of tracking the ball trajectory might boil down to conventional orientation and tracking algorithms, the problem becomes much harder because during the free-fall the IMU doesn't read any gravity. Therefore, it is difficult to infer the orientation of the ball. However, in the absence of wind, the balls rotation axis doesn't change. Thus, while the ball is in free fall - acceleration can be tracked in LRF and can be translated to GRF by using the orientation of the ball when it was released. Magnetometer reading can then be used to find the 3D orientation of the ball. However, the ball also experiences wind force which makes it swing and spin in the air. This visualized by modeling the local rotation axis using the magnetometer data as a time-varying polynomial. The modeled rotation from the magnetometer along with North vectors is used to estimate the 3D orientation of the ball. \\
+
+The system also uses UWB to track the ball, however, it only uses two anchors - one at each end of the pitch. As visualized in the paper, the intersection of two spheres is an arc which defines the ambiguity for the ball at each time instant. However, the trajectory of the ball is parabolic - therefore, the angle of arrival from the antennas, the distance from each wicket positions, and the constraint of parabolic motion is used to jointly optimize a non-linear objective function that finds the location trajectory of the ball with minimum error. 
+
+\section{Critique \& Opinion}
+This is a very interesting paper for two reasons: 1) It talks about a very specific application - tracking ball trajectory and its spin for a game. 2) It uses the fundamentals of physics to break down this hard problem into small solvable components. While this paper only explores the physics-based model of the ball, I wonder how much more advanced algorithms and techniques in machine learning use the sensor fusion knowledge from this paper. \\
+
+Since the experiments have been conducted inside and not in a natural game setting, it's hard to say how will multipath change. While there will be less multipath from the walls and roof, I believe the players and wickets will also introduce substantial multipath. However, since the ball moves at such a fast pace as compared to the player - it should be possible to remove all ambiguities. Assuming that authors cannot swing the ball in mid-air or make it spin (because of the ViCon markers), I wonder if pitching the ball fast enough to make it swing will make any difference in the system's performance. It's noted that capturing ground truth and evaluating the system for such a project is indeed hard.
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+
+
+\end{document}

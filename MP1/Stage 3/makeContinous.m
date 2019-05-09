@@ -1,6 +1,8 @@
 function final_data = makeContinous(data)
 %data_acc = data(strcmp(data.sensor_change,'android.sensor.accelerometer'),:);
-data_acc = data(strcmp(data.sensor_change,'K330 3-axis Accelerometer'),:);
+%data_acc = data(strcmp(data.sensor_change,'K330 3-axis Accelerometer'),:);
+data_acc = data(strcmp(data.sensor_change,'MPU6500 Acceleration Sensor'),:);
+
 data_acc = table2array(data_acc(2:end,1:4));
 data_acc = horzcat(data_acc(:,1) - data_acc(1,1), data_acc(:,2:end));
 
